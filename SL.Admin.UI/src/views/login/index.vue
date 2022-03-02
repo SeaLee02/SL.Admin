@@ -48,6 +48,8 @@ import { ElNotification } from "element-plus";
 import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
 
+import { Message, Menu as IconMenu, Setting } from '@element-plus/icons-vue'
+
 const router = useRouter();
 const $store = useStore();
 

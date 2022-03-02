@@ -32,7 +32,29 @@ const routes = [
       title: "首页",
       NoTabPage: true,
       requireAuth: true,
+      NoNeedHome: false, // 添加该字段，表示不需要home模板
+    },
+  },
+  {
+    path: "/",
+    component: () => import("@/views/layout/index.vue"),
+    redirect: '/layout',
+    meta: {
+      title: "首页",
+      NoTabPage: true,
+      requireAuth: true,
       NoNeedHome: true, // 添加该字段，表示不需要home模板
+    },
+  },
+  {
+    path: "/user",
+    component: () => import("@/views/user/index.vue"),
+    name: "user",
+    meta: {
+      title: "账号",
+      NoTabPage: true,
+      requireAuth: true,
+      NoNeedHome: false, // 添加该字段，表示不需要home模板
     },
   },
 ];
@@ -43,8 +65,9 @@ const router = createRouter({
 
 // 路由加载前
 router.beforeEach(async (to, from, next) => {
-  console.log(`执行的页面:${to.path}`);
-  console.log(`旧页面:${from.path}`);
+  console.log(`执行的页面:${to}`);
+  console.log(to);
+  console.log(`旧页面:${from}`);
    console.log(store.state);
   if (!store.state.token) {
     store.commit("saveToken", window.localStorage.Token)
@@ -52,6 +75,7 @@ router.beforeEach(async (to, from, next) => {
   if (!store.state.tokenExpire) {
     store.commit("saveTokenExpire", window.localStorage.TokenExpire)
   }
+
   if (to.meta.requireAuth) {
     console.log(1);
     next();
