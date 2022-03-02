@@ -1,11 +1,11 @@
 # SL.Admin
 Vue前端框架
 # 技术
-- [√] Vite生成项目
-- [√] Vue 3.x(采用组合式API)
-- [√] Router 4.x
-- [√] Vuex 4.x
-- [√] UI Element Plus
-- [√] Axios
-- [√] Sass CSS 预编译器 
-- [x] ESLint 配置
+- [x] Vite生成项目
+- [x] Vue 3.x(采用组合式API)
+- [x] Router 4.x
+- [x] Vuex 4.x
+- [x] UI Element Plus
+- [x] Axios
+- [x] Sass CSS 预编译器 
+- [ ] ESLint 配置
