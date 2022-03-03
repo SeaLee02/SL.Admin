@@ -79,7 +79,7 @@ const handleSubmit = () => {
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
     );
     var curTime = new Date();
-    var expiredate = new Date(curTime.setSeconds(curTime.getSeconds() + 36000));
+    var expiredate = new Date(curTime.setSeconds(curTime.getSeconds() + 60));
     $store.commit("saveTokenExpire", expiredate);
     ElNotification({
       title: "登陆",

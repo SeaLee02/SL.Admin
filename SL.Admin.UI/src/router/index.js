@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import store from '@/store/index';
+import store from "@/store/index";
 
 const routes = [
   {
@@ -20,7 +20,7 @@ const routes = [
     meta: {
       title: "登录",
       NoTabPage: true,
-      requireAuth: true,
+      requireAuth: false,
       NoNeedHome: true, // 添加该字段，表示不需要home模板
     },
   },
@@ -38,7 +38,7 @@ const routes = [
   {
     path: "/",
     component: () => import("@/views/layout/index.vue"),
-    redirect: '/layout',
+    redirect: "/layout",
     meta: {
       title: "首页",
       NoTabPage: true,
@@ -65,23 +65,33 @@ const router = createRouter({
 
 // 路由加载前
 router.beforeEach(async (to, from, next) => {
-  console.log(`执行的页面:${to}`);
-  console.log(to);
-  console.log(`旧页面:${from}`);
-   console.log(store.state);
+  // console.log(`执行的页面:${to.path}`);
+  // console.log(to);
+  // console.log(`旧页面:${from.path}`);
+  // console.log(store.state);
   if (!store.state.token) {
-    store.commit("saveToken", window.localStorage.Token)
+    store.commit("saveToken", window.localStorage.Token);
   }
   if (!store.state.tokenExpire) {
-    store.commit("saveTokenExpire", window.localStorage.TokenExpire)
+    store.commit("saveTokenExpire", window.localStorage.TokenExpire);
   }
 
   if (to.meta.requireAuth) {
-    console.log(1);
-    next();
+    // console.log(store.state.token);
+    // console.log(store.state.tokenExpire);
+    // &&store.state.tokenExpire>new Date()
+    //判断Token是否过期
+    if (store.state.token && store.state.token != "undefined") {
+      // 通过vuex state获取当前的token是否存在
+      console.log(1);
+      next();
+    } else {
+      console.log(2);
+      next('/login');
+    }
   } else {
-    console.log(2);
-    next('/login');
+    console.log(3);
+    next();
   }
 });
 
